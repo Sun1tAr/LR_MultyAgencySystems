@@ -1,6 +1,5 @@
 package my_package;
 
-import javax.sound.midi.Soundbank;
 import java.util.Scanner;
 
 public class Main {
@@ -49,7 +48,7 @@ public class Main {
                         case "*":
                             result = rom1.multiplication(num2);
                             break;
-                        default: System.err.println(result + "-1");
+                        default:
                     }
 
                 }else if (NumberIdentifier.isArabicNumber(num1) && NumberIdentifier.isArabicNumber(num2)){
@@ -67,19 +66,17 @@ public class Main {
                         case "*":
                             result = ar1.multiplication(num2);
                             break;
-                        default: System.err.println(result + "-2");
+                        default:
                     }
                 }else{
                     System.err.println("Неверный формат числа");
                 }
-                System.out.println(result);
+                System.out.println("Результат: \n" + result);
             }
             if(!flag) {
-                System.out.println("Повторить ввод? \n 1 - Да \n 2 - Нет");
+                System.out.println("Повторить ввод? \n 1 - Да \n 0 - Нет");
                 if (sc.nextInt() == 1) flag = true;
-                else ;
             }
         }
-
     }
 }
