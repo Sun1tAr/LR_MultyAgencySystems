@@ -28,8 +28,8 @@ public class Main {
                 } else num2 += strChars[i];
             }
 
-            if (iOperator == Integer.MAX_VALUE) {
-                System.err.println("На вход подано одно число, измените входные данные: " + "\n" + num1);
+            if (iOperator == Integer.MAX_VALUE || num1 == "" || num2 == "") {
+                System.err.println("На вход подано одно число, измените входные данные: " + "\n");
                 flag = true;
             } else {
                 String result = "Произошла ошибка - повторите ввод";
