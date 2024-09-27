@@ -5,7 +5,6 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-//        boolean flag = true;
         while (true) {
 
             Scanner sc = new Scanner(System.in);
@@ -13,42 +12,42 @@ public class Main {
 
             char[] strChars = string.toCharArray();
             String result = "";
-            String num1 = "";
-            String num2 = "";
-            String operator = "";
+            StringBuilder num1 = new StringBuilder();
+            StringBuilder num2 = new StringBuilder();
+            StringBuilder operator = new StringBuilder();
             int iOperator = Integer.MAX_VALUE;
 
             for (int i = 0; i < strChars.length; i++) {
 
                 if (strChars[i] == '+' || strChars[i] == '-' || strChars[i] == '*' || strChars[i] == '/') {
                     iOperator = i;
-                    operator += strChars[i];
+                    operator.append(strChars[i]);
                 } else if (i < iOperator) {
-                    num1 += strChars[i];
-                } else num2 += strChars[i];
+                    num1.append(strChars[i]);
+                } else num2.append(strChars[i]);
             }
 
-            if (iOperator == Integer.MAX_VALUE || num1.isEmpty() || num2.isEmpty()) {
+            if (iOperator == Integer.MAX_VALUE || (num1.isEmpty()) || (num2.isEmpty())) {
                 System.err.println("На вход подано одно число, измените входные данные: ");
                 continue;
             } else {
-                if (NumberIdentifier.isRomanNumber(num1) && NumberIdentifier.isRomanNumber(num2)) {
-                    RomanCalc rom1 = new RomanCalc(num1);
-                    result = switch (operator) {
-                        case "+" -> rom1.addition(num2);
-                        case "/" -> rom1.division(num2);
-                        case "-" -> rom1.substraction(num2);
-                        case "*" -> rom1.multiplication(num2);
+                if (NumberIdentifier.isRomanNumber(num1.toString()) && NumberIdentifier.isRomanNumber(num2.toString())) {
+                    RomanCalc rom1 = new RomanCalc(num1.toString());
+                    result = switch (operator.toString()) {
+                        case "+" -> rom1.addition(num2.toString());
+                        case "/" -> rom1.division(num2.toString());
+                        case "-" -> rom1.substraction(num2.toString());
+                        case "*" -> rom1.multiplication(num2.toString());
                         default -> throw new IllegalArgumentException("Ошибка");
                     };
 
-                } else if (NumberIdentifier.isArabicNumber(num1) && NumberIdentifier.isArabicNumber(num2)) {
-                    ArabicCalc ar1 = new ArabicCalc(num1);
-                    result = switch (operator) {
-                        case "+" -> ar1.addition(num2);
-                        case "/" -> ar1.division(num2);
-                        case "-" -> ar1.substraction(num2);
-                        case "*" -> ar1.multiplication(num2);
+                } else if (NumberIdentifier.isArabicNumber(num1.toString()) && NumberIdentifier.isArabicNumber(num2.toString())) {
+                    ArabicCalc ar1 = new ArabicCalc(num1.toString());
+                    result = switch (operator.toString()) {
+                        case "+" -> ar1.addition(num2.toString());
+                        case "/" -> ar1.division(num2.toString());
+                        case "-" -> ar1.substraction(num2.toString());
+                        case "*" -> ar1.multiplication(num2.toString());
                         default -> throw new IllegalArgumentException("Ошибка");
                     };
                 } else {

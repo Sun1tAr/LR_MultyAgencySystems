@@ -1,7 +1,7 @@
 package my_package;
 
 public class RomanCalc extends Calculations{
-    private int value;
+    private final int value;
 
     public RomanCalc(String value){
         this.value = super.convertToArabic(value);
