@@ -21,6 +21,7 @@ public class Main {
 
                 if (strChars[i] == '+' || strChars[i] == '-' || strChars[i] == '*' || strChars[i] == '/') {
                     iOperator = i;
+
                     operator.append(strChars[i]);
                 } else if (i < iOperator) {
                     num1.append(strChars[i]);
