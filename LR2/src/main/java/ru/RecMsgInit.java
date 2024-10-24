@@ -25,13 +25,10 @@ public class RecMsgInit extends Behaviour {
     @Override
     public void action() {
 
-
-
         MessageTemplate agree = MessageTemplate.MatchPerformative(ACLMessage.ACCEPT_PROPOSAL);
         ACLMessage reply = myAgent.receive(agree);
-        if (reply != null){
-            if (numberOfMsg < 3){
-
+        if (reply != null) {
+            if (numberOfMsg < 3) {
                 setNewInitiator(myAgent, reply.getSender().getLocalName());
 
                 String rep = reply.getContent();
@@ -43,9 +40,9 @@ public class RecMsgInit extends Behaviour {
                 y = Float.parseFloat(values[3]);
                 y1 = Float.parseFloat(values[4]);
 
-                xx[0] = x-dx;
+                xx[0] = x - dx;
                 xx[1] = x;
-                xx[2] = x+dx;
+                xx[2] = x + dx;
 
                 yy0[numberOfMsg] = y0;
                 yy[numberOfMsg] = y;
@@ -53,14 +50,10 @@ public class RecMsgInit extends Behaviour {
 
                 numberOfMsg++;
             }
-            if (numberOfMsg == 3){
-                if (!tooSmallErr()){
-                    refactorOfPoint();
-                    myAgent.addBehaviour(new Start(initiator,x,dx));
-                }
-
+            if (numberOfMsg == 3 && !tooSmallErr()) {
+                refactorOfPoint();
+                myAgent.addBehaviour(new Start(initiator, x, dx));
             }
-
         } else block();
 
 
@@ -71,27 +64,27 @@ public class RecMsgInit extends Behaviour {
         return numberOfMsg == 3;
     }
 
-    private void refactorOfPoint(){
+    private void refactorOfPoint() {
         float smallX;
         smallX = Calculator.getMin(xx, yy0, yy, yy1);
-        if(smallX == x){
-            this.dx = dx/2;
+        if (smallX == x) {
+            this.dx = dx / 2;
         } else this.x = smallX;
     }
 
-    private void setNewInitiator(Agent that, String sender){
+    private void setNewInitiator(Agent that, String sender) {
         if (isNewInitiator) return;
-        if (!that.getLocalName().equals(sender)){
+        if (!that.getLocalName().equals(sender)) {
             this.initiator = sender;
             isNewInitiator = true;
         }
 
     }
 
-    private boolean tooSmallErr(){
+    private boolean tooSmallErr() {
         if (Math.abs(yy0[0] - yy1[0]) <= delta
                 && Math.abs(yy0[1] - yy1[1]) <= delta
-                && Math.abs(yy0[2] - yy1[2]) <= delta){
+                && Math.abs(yy0[2] - yy1[2]) <= delta) {
             String out = "f(x) = " + Calculator.getSumY(yy) + ", x = " + this.x;
             System.err.println(out);
             return true;

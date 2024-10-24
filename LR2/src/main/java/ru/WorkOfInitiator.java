@@ -10,8 +10,6 @@ public class WorkOfInitiator extends WakerBehaviour {
     String values;
     Agent agent;
 
-
-
     public WorkOfInitiator(Agent a, long timeout, String values) {
         super(a, timeout);
         this.values = values;
@@ -27,15 +25,12 @@ public class WorkOfInitiator extends WakerBehaviour {
         msgToHelpers.setContent(this.values);
         myAgent.send(msgToHelpers);
 
-
         myAgent.addBehaviour(new RecMsgInit());
-
     }
 
     @Override
     public void onStart() {
         myAgent.addBehaviour(new RecieveMsg(1));
     }
-
 
 }
