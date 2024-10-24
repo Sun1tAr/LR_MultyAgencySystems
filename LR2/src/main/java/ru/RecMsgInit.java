@@ -55,8 +55,6 @@ public class RecMsgInit extends Behaviour {
                 myAgent.addBehaviour(new Start(initiator, x, dx));
             }
         } else block();
-
-
     }
 
     @Override
