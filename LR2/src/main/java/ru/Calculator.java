@@ -18,14 +18,15 @@ public class Calculator {
         y0 = getSumY(yy0);
         y = getSumY(yy);
         y1 = getSumY(yy1);
-        if (y0 < y && y < y1) return xx[0]; // todo не оч нравятся эти условия, можно попробовать переписать через три bool переменных и объединить часть условий
-        if (y0 > y && y < y1) return xx[1];
-        if (y0 > y && y > y1) return xx[2];
-        if (y0 < y && y > y1) {
-            if (y0 < y1) return xx[0];
-            if (y0 > y1) return xx[2];
-        }
-        throw new IllegalArgumentException("Расчет некорректен");
+
+        boolean toLeft = (y0 < y && y < y1) || (y0 < y1);
+        boolean toRight = (y0 > y && y > y1 || (y0 > y1));
+        boolean toCenter = (y0 > y && y < y1);
+
+        if (toLeft) return xx[0];
+        if (toCenter) return xx[1];
+        if (toRight) return xx[2];
+        else throw new IllegalArgumentException("Расчет некорректен");
     }
 
     public static float getSumY(float[] yy) {
