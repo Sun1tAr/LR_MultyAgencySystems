@@ -3,13 +3,13 @@ package ru;
 import jade.core.AID;
 import jade.core.Agent;
 
-import java.util.Objects;
 // Взял вариант 3 тк 18 по списку без смещения
 //Ищу минимум
 
 public class FunctionAgent extends Agent {
 
     float x, dx;
+
     @Override
     protected void setup() {
         System.out.println("Hi - " + this.getLocalName());
@@ -20,24 +20,26 @@ public class FunctionAgent extends Agent {
             this.addBehaviour(new Start(this.getLocalName(), x, dx));
         } else {
             this.addBehaviour(new RecieveMsg(1000));
-
         }
     }
+
     AID two, three;
-    private void setRecievers(Agent a){
-        switch(a.getLocalName()){
-            case("Bob1"): {
+
+    private void setRecievers(Agent a) {
+        switch (a.getLocalName()) {
+            case ("Bob1") -> { // todo не правильно использовали switch-case, была ошибка fall-through
                 two = new AID("Bob2", false);
                 three = new AID("Bob3", false);
             }
-            case("Bob2"): {
+            case ("Bob2") -> {
                 two = new AID("Bob3", false);
                 three = new AID("Bob1", false);
             }
-            case("Bob3"): {
+            case ("Bob3") -> {
                 two = new AID("Bob1", false);
                 three = new AID("Bob2", false);
             }
+            default -> throw new IllegalArgumentException("Агент не найден");
         }
     }
 }

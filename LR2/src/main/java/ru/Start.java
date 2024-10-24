@@ -1,7 +1,6 @@
 package ru;
 
 import jade.core.AID;
-import jade.core.Agent;
 import jade.core.behaviours.OneShotBehaviour;
 import jade.lang.acl.ACLMessage;
 
@@ -9,7 +8,6 @@ public class Start extends OneShotBehaviour {
 
     String currentInitiator;
     float x, dx;
-
 
     public Start(String nextInitiator, float x, float dx) {
         this.currentInitiator = nextInitiator;
@@ -26,15 +24,11 @@ public class Start extends OneShotBehaviour {
         st.addReceiver(reciever);
         st.setContent(values);
         myAgent.send(st);
-
     }
 
     @Override
     public void onStart() {
-
         myAgent.addBehaviour(new RecieveMsg(1));
     }
-
-
 
 }
