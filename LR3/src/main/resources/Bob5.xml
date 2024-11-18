@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cfg>
+    <isInitiator>0</isInitiator>
+    <findedAgentlocalName>Bob2</findedAgentlocalName>
+    <agents>
+
+        <agent>
+            <name>Bob1</name>
+            <length>12</length>
+        </agent>
+        <agent>
+            <name>Bob2</name>
+            <length>14</length>
+        </agent>
+        <agent>
+            <name>Bob3</name>
+            <length>1</length>
+        </agent>
+        <agent>
+            <name>Bob4</name>
+            <length>23</length>
+        </agent>
+        <agent>
+            <name>Bob6</name>
+            <length>6</length>
+        </agent>
+        <agent>
+            <name>Bob7</name>
+            <length>5</length>
+        </agent>
+        <agent>
+            <name>Bob8</name>
+            <length>14</length>
+        </agent>
+    </agents>
+
+</cfg>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cfg>
+    <isInitiator>0</isInitiator>
+    <findedAgentlocalName>Bob2</findedAgentlocalName>
+    <agents>
+
+        <agent>
+            <name>Bob9</name>
+            <length>24</length>
+        </agent>
+        <agent>
+            <name>Bob11</name>
+            <length>26</length>
+        </agent>
+        <agent>
+            <name>Bob12</name>
+            <length>14</length>
+        </agent>
+
+    </agents>
+
+</cfg>
