@@ -15,7 +15,7 @@ public class AgentsTripCfg {
     @XmlElement
     private int isInitiator;
     @XmlElement
-    private String findedAgentlocalName;
+    private String targetAgentlocalName;
 
     public List<AgentTripCfg> getAgents() {
         return agents;
@@ -33,11 +33,11 @@ public class AgentsTripCfg {
         this.isInitiator = isInitiator;
     }
 
-    public String getFindedAgentlocalName() {
-        return findedAgentlocalName;
+    public String getTargetAgentlocalName() {
+        return targetAgentlocalName;
     }
 
-    public void setFindedAgentlocalName(String findedAgentlocalName) {
-        this.findedAgentlocalName = findedAgentlocalName;
+    public void setTargetAgentlocalName(String targetAgentlocalName) {
+        this.targetAgentlocalName = targetAgentlocalName;
     }
 }
