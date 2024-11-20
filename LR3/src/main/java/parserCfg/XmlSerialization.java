@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public class XmlSerialization {
 
-    public static <T> Optional<T> deserialize(String path, Class<T> clazz){
+    public static <T> Optional<T> deserialize(String path, Class<T> clazz) {
         File f = new File(path);
         try {
             JAXBContext jaxbContext = JAXBContext.newInstance(clazz);
