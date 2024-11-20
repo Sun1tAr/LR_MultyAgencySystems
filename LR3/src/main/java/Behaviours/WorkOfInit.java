@@ -4,56 +4,60 @@ import jade.core.AID;
 import jade.core.Agent;
 import jade.core.behaviours.WakerBehaviour;
 import jade.lang.acl.ACLMessage;
-import lombok.SneakyThrows;
 import parserCfg.AgentTripCfg;
 import parserCfg.AgentsTripCfg;
+import parserCfg.MessageRefactor;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Optional;
 
 
 public class WorkOfInit extends WakerBehaviour {
 
-    HashMap<String, Integer> trip;
-    Optional<AgentsTripCfg> cfg;
-    String targetAgent;
+    private final LinkedHashMap<String, Integer> trip;
+    private final Optional<AgentsTripCfg> cfg;
+    private final String targetAgent;
 
-    public WorkOfInit(HashMap<String, Integer> trip, Optional<AgentsTripCfg> cfg,String targetAgent ,Agent a, long timeout) {
+    public WorkOfInit(LinkedHashMap<String, Integer> trip, Optional<AgentsTripCfg> cfg, String targetAgent, Agent a, long timeout) {
         super(a, timeout);
         this.cfg = cfg;
         this.targetAgent = targetAgent;
         this.trip = trip;
     }
 
-    @SneakyThrows
     @Override
     protected void onWake() {
         super.onWake();
 
-        if (trip.containsKey(myAgent.getLocalName()) && targetAgent.equals(myAgent.getLocalName())){
-            myAgent.addBehaviour(new PreEnder(this.trip));
+        if (trip.containsKey(myAgent.getLocalName()) && targetAgent.equals(myAgent.getLocalName())) {
+
+            LinkedHashMap<String, Integer> localTrip = new LinkedHashMap<>();
+            localTrip.putAll(this.trip);
+
+            ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
+            String content = MessageRefactor.newMsgFromHM(localTrip, this.targetAgent);
+            msg.setContent(content);
+            String initiator = MessageRefactor.parseMsgToCommonInitName(content);
+            msg.addReceiver(new AID(initiator, false));
+            myAgent.send(msg);
+
+            //TODO debugger
+//            myAgent.addBehaviour(new Debugger(this.trip));
         } else {
-            //TODO я не цель и у меня есть свзяи - разослать сообщения по связям
+
             for (AgentTripCfg agent : cfg.get().getAgents()) {
-                if (trip.containsKey(agent.getName())){
+                if (trip.containsKey(agent.getName())) {
                     continue;
                 }
-                HashMap <String,Integer> localTrip= new HashMap<>();
+                LinkedHashMap<String, Integer> localTrip = new LinkedHashMap<>();
                 localTrip.putAll(trip);
                 localTrip.put(agent.getName(), agent.getLength());
-                ACLMessage msg = new ACLMessage(0);
-                msg.setContentObject(localTrip);
-                msg.setContent(this.targetAgent);
-                msg.addReceiver(new AID(agent.getName(),false));
+                ACLMessage msg = new ACLMessage(ACLMessage.ACCEPT_PROPOSAL);
+                String content = MessageRefactor.newMsgFromHM(localTrip, this.targetAgent);
+                msg.setContent(content);
+                msg.addReceiver(new AID(agent.getName(), false));
                 myAgent.send(msg);
-
-
             }
-
         }
-
-
-
-        //TODO я - не цель и у меня нет связей - 0
     }
 }
