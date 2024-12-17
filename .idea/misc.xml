@@ -6,6 +6,8 @@
       <list>
         <option value="$PROJECT_DIR$/LR2/pom.xml" />
         <option value="$PROJECT_DIR$/LR3/pom.xml" />
+        <option value="$PROJECT_DIR$/LR3/LR4_AgentDetector/pom.xml" />
+        <option value="$PROJECT_DIR$/LR4_AgentDetector/pom.xml" />
       </list>
     </option>
   </component>

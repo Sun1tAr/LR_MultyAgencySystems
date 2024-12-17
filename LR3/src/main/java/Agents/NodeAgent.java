@@ -10,27 +10,25 @@ import java.util.Optional;
 
 public class NodeAgent extends Agent {
 
-    private final int delayTimeToDebug = 0;
-    private final int workingTime = 10000;
-    private final int processingTime = 1000;
-
-    Optional<AgentsTripCfg> cfg;
+    private final static int DELAY_TIME_TO_DEBUG = 0;
+    private final static int WORKING_TIME = 10000;
+    private final static int PROCESSING_TIME = 1000;
+    private Optional<AgentsTripCfg> cfg;
 
     @Override
     protected void setup() {
-        this.setCfg();
+        setCfg();
         if (cfg.get().getIsInitiator() == 1) {
-            this.addBehaviour(new Start(this.cfg, cfg.get().getTargetAgentlocalName(),
-                    this.delayTimeToDebug, this.workingTime, this.processingTime));
+            addBehaviour(new Start(cfg, cfg.get().getTargetAgentlocalName(),
+                    DELAY_TIME_TO_DEBUG, WORKING_TIME, PROCESSING_TIME));
         }
-        this.addBehaviour(new Receiver(this.cfg));
+        addBehaviour(new Receiver(cfg));
     }
 
     protected void setCfg() {
         String path = "LR3/src/main/resources/" + this.getLocalName() +
                 ".xml";
-
-        this.cfg = XmlSerialization.deserialize(path, AgentsTripCfg.class);
+        cfg = XmlSerialization.deserialize(path, AgentsTripCfg.class);
 
     }
 }

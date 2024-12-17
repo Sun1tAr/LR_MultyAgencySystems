@@ -45,7 +45,7 @@ public class Start extends OneShotBehaviour {
             msg.addReceiver(new AID(initiator, false));
             myAgent.send(msg);
 
-            System.out.println("Я нашел себя! - " + myAgent.getLocalName());
+//            System.out.println("Я нашел себя! - " + myAgent.getLocalName());
         } else {
             myAgent.addBehaviour(new WorkOfInit(trip, cfg, targetAgent, myAgent, delayTimeToDebug));
             myAgent.addBehaviour(new ReceiveTrip(myAgent, this.workingTime, this.processingTime));

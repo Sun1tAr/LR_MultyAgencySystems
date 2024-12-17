@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <cfg>
-    <isInitiator>0</isInitiator>
+    <isInitiator>1</isInitiator>
     <targetAgentlocalName>Bob12</targetAgentlocalName>
     <agents>
 

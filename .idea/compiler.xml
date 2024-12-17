@@ -7,8 +7,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="LR2 (1)" />
         <module name="LR3" />
         <module name="LR2" />
+        <module name="LR2 (2)" />
+        <module name="LR4_AgentDetector" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
