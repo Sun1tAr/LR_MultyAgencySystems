@@ -9,11 +9,13 @@ import java.util.Optional;
 public class JSerializator {
 
     private static ObjectMapper mapper;
+
     static {
         mapper = new ObjectMapper();
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     }
-    public static Optional<String> serialize(Object o){
+
+    public static Optional<String> serialize(Object o) {
 
         try {
             return Optional.of(mapper.writeValueAsString(o));
@@ -22,17 +24,16 @@ public class JSerializator {
             return Optional.empty();
         }
     }
-    public static <T> Optional<T> deserialize(String json, Class<T> clazz){
+
+    public static <T> Optional<T> deserialize(String json, Class<T> clazz) {
         try {
             T res = mapper.readValue(json, clazz);
             return Optional.of(res);
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return Optional.empty();
         }
     }
-
-
 
 
 }

@@ -9,7 +9,7 @@ public class Publisher {
     private int port;
     private InetAddress ip;
 
-    public void create(String ip, int port){
+    public void create(String ip, int port) {
         this.port = port;
         try {
             this.ip = InetAddress.getByName(ip);
@@ -24,7 +24,7 @@ public class Publisher {
         }
     }
 
-    public void send(String data){
+    public void send(String data) {
         DatagramPacket datagramPacket = new DatagramPacket(data.getBytes(), data.getBytes().length, ip, port);
         try {
             socket.send(datagramPacket);

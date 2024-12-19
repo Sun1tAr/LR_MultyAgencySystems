@@ -5,16 +5,16 @@ import jade.core.AID;
 import java.util.List;
 import java.util.Optional;
 
-public class Detector implements AgentDetector{
+public class Detector implements AgentDetector {
 
-    Subscriber sub;
-    List<AID> activeAgents;
+    private Subscriber sub;
+    private List<AID> activeAgents;
 
     @Override
     public void startPublishing(AID aid, int port) {
         String agentData;
         Optional<String> serialize = JSerializator.serialize(aid);
-        if (serialize.isPresent()){
+        if (serialize.isPresent()) {
             agentData = serialize.get();
         } else {
             agentData = "";
@@ -24,15 +24,15 @@ public class Detector implements AgentDetector{
         Publisher publisher = new Publisher();
         publisher.create("127.0.0.1", 9000);
         Thread senderThread = new Thread(() -> {
-            while(true) {
 
-                publisher.send(agentData);
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
+
+            publisher.send(agentData);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
             }
+
 
         });
         senderThread.start();
